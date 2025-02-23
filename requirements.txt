@@ -1,0 +1,6 @@
+python-twitter-v2==2.1.1
+google-generativeai==0.3.1
+python-dotenv==1.0.0
+schedule==1.2.0
+requests==2.31.0
+pycoingecko==3.1.0
