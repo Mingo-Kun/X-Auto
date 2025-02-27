@@ -3,20 +3,30 @@ from config.config import (
     TWITTER_API_KEY,
     TWITTER_API_SECRET,
     TWITTER_ACCESS_TOKEN,
-    TWITTER_ACCESS_TOKEN_SECRET
+    TWITTER_ACCESS_TOKEN_SECRET,
+    TWITTER_BEARER_TOKEN
 )
 
 class TwitterHandler:
     def __init__(self):
-        # Authenticate with Twitter
-        self.auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET)
-        self.auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
-        self.api = tweepy.Client(
-            consumer_key=TWITTER_API_KEY,
-            consumer_secret=TWITTER_API_SECRET,
-            access_token=TWITTER_ACCESS_TOKEN,
-            access_token_secret=TWITTER_ACCESS_TOKEN_SECRET
-        )
+        try:
+            # Initialize Twitter API v2 client
+            self.api = tweepy.Client(
+                bearer_token=TWITTER_BEARER_TOKEN,
+                consumer_key=TWITTER_API_KEY,
+                consumer_secret=TWITTER_API_SECRET,
+                access_token=TWITTER_ACCESS_TOKEN,
+                access_token_secret=TWITTER_ACCESS_TOKEN_SECRET,
+                wait_on_rate_limit=True
+            )
+            
+            # Verify credentials
+            self.me = self.api.get_me()
+            if not self.me:
+                raise tweepy.TweepError("Failed to verify credentials")
+            
+        except Exception as e:
+            raise Exception(f"Twitter authentication failed: {str(e)}")
 
     def post_tweet(self, content):
         """Post a tweet"""

@@ -26,8 +26,13 @@ class TrendTracker:
                 "https://api.coingecko.com/api/v3/news",
                 headers={"accept": "application/json"}
             )
-            news = response.json()
-            return [item['title'] for item in news[:5]]
+            if response.status_code == 200:
+                news = response.json()
+                if isinstance(news, dict) and 'data' in news:
+                    return [item['title'] for item in news['data'][:5]]
+                elif isinstance(news, list):
+                    return [item['title'] for item in news[:5]]
+            return []
         except Exception as e:
             print(f"Error getting Web3 trends: {str(e)}")
             return []

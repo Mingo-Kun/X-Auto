@@ -67,4 +67,7 @@ python src/main.py
 
 ## Configuration
 
-You can modify the bot's behavior by adjusting the following parameters in `config
+You can modify the bot's behavior by adjusting the following parameters in `config/config.py`:
+- `TWEET_INTERVAL`: Hours between tweets (default: 12)
+- `MAX_TWEETS_PER_DAY`: Maximum number of tweets per day (default: 2)
+- `MAX_REPLIES_PER_DAY`: Maximum number of replies per day (default: 10)
