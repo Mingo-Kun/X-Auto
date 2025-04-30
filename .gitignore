@@ -1,2 +1,4 @@
 .env
 .idx
+venv/
+.vscode/
