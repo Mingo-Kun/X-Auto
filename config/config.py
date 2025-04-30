@@ -24,10 +24,10 @@ missing_vars = [var for var in required_twitter_vars if not os.getenv(var)]
 if missing_vars:
     raise ValueError(f"Missing required Twitter environment variables: {', '.join(missing_vars)}")
 
-# Gemini API Credentials
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY environment variable is not set")
+# OpenRouter API Credentials
+OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')
+if not OPENROUTER_API_KEY:
+    raise ValueError("OPENROUTER_API_KEY environment variable is not set")
 
 # Bot Configuration
 TWEET_INTERVAL = 6  # Hours between tweets
